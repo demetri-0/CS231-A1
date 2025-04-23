@@ -27,7 +27,7 @@
 #define MAX_LENGTH 30 // maximum size of a word from the input file
 #define MAX_INCORRECT_GUESSES 6
 
-int getPartialMatches(char words[MAX_WORDS][MAX_LENGTH], char goalWordDisplay[]);
+int getPartialMatches(char words[MAX_WORDS][MAX_LENGTH], int wordCount, char goalWordDisplay[]);
 
 int main() {
 
@@ -142,7 +142,7 @@ int main() {
 		/*
 		Calls a function to update partial matches and prints the count.
 		*/
-		printf("Partial Matches: %d\n", getPartialMatches(words, goalWordDisplay));
+		printf("Partial Matches: %d\n", getPartialMatches(words, wordCount, goalWordDisplay));
 
 		/*
 		If the game is ongoing, the user is prompted to guess a character. Their
@@ -217,13 +217,12 @@ int main() {
 	return 0;
 }
 
-
 /*
 Function Name: getPartialMatches
 
-Input: Param1(words) - array of all words from the input file,
-Param2(goalWordDisplay) - the dynamic display of the goal word, with dashes
-representing unguessed letters
+Input: Param1(words) - array of all words from the input file, Param2(wordCount)
+- the number of words obtained from the input file, Param3(goalWordDisplay) -
+the dynamic display of the goal word, with dashes representing unguessed letters
 
 Output: Returns the number of partial matches between the words from the input
 file and the current goal word display.
@@ -233,7 +232,7 @@ matches with the current display of the goal word. The length of the display and
 the index of correctly guessed characters is used to determine a partial match.
 The number of partial matches is returned.
 */
-int getPartialMatches(char words[MAX_WORDS][MAX_LENGTH], char goalWordDisplay[]) {
+int getPartialMatches(char words[MAX_WORDS][MAX_LENGTH], int wordCount, char goalWordDisplay[]) {
 
 	bool isPartialMatch = true;
 	int newPartialMatches = 0;
@@ -245,7 +244,7 @@ int getPartialMatches(char words[MAX_WORDS][MAX_LENGTH], char goalWordDisplay[])
 	is no partial match. Otherwise, there is a partial match, and a variable is
 	incremented to keep track of the count.
 	*/
-	for (int i = 0; i < MAX_WORDS; i++) {
+	for (int i = 0; i < wordCount; i++) {
 
 		if (strlen(words[i]) != strlen(goalWordDisplay)) {
 			isPartialMatch = false;
@@ -269,4 +268,3 @@ int getPartialMatches(char words[MAX_WORDS][MAX_LENGTH], char goalWordDisplay[])
 
 	return newPartialMatches;
 }
-
