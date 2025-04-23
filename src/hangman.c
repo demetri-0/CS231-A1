@@ -1,12 +1,20 @@
 /*
 	Author: Demetri Karras
 	Assignment Number: 1
-	Date of Submission:
+	Date of Submission: April 22nd, 2025
+
 	Name of this file: hangman.c
-	Short description of contents:
-	( if this is main.c, explain the program in your own words)
-	( if this is someOtherFunctions.c explain briefly that
-	collection of related tasks outlined in the functions)
+	Description:
+	This program allows the user to play hangman in the terminal. The user is
+	prompted to enter a text file that contains the words to be used for
+	the game. A random word is selected from this file as the goal word. It is
+	displayed to the user as a series of dashes representing each letter. The
+	user guesses letters one at a time in an attempt to replace all the dashes
+	with letters, effectively guessing the word. On each turn, the user sees
+	their progress in guessing the goal word, the letters they have incorrectly
+	guessed, and the number of partial matches in the word set they provided.
+	If the user makes 6 incorrect guesses, they lose. If they reveal
+	the entire word, they win.
 */
 
 #include <stdio.h>
@@ -25,6 +33,9 @@ int main() {
 
 	setvbuf(stdout, NULL, _IONBF, 0);
 
+	/*
+	Print welcome message and obtain input file name.
+	*/
 	char inputFileName[256];
 
 	printf("Welcome to Hangman! Please provide the name of your input file:\n");
@@ -45,8 +56,8 @@ int main() {
 	}
 	else {
 		while (fgets(words[wordCount], MAX_LENGTH - 1, inputFile) != NULL && wordCount < MAX_WORDS) {
-			int indexOfNewLine = strcspn(words[wordCount], "\n");
-			words[wordCount][indexOfNewLine] = '\0';
+			int indexOfNewline = strcspn(words[wordCount], "\n");
+			words[wordCount][indexOfNewline] = '\0';
 			wordCount++;
 		}
 	}
@@ -54,8 +65,8 @@ int main() {
 
 	/*
 	A random number is generated and used to obtain a random word from the array
-	containing all words from the input file. This word is copied into the
-	goalWord variable.
+	containing words from the input file. This word is copied into the goalWord
+	variable.
 	*/
 	srand(time(NULL));
 	int randomIndex = rand() % wordCount;
@@ -143,6 +154,7 @@ int main() {
 			Prompts the user to guess a character and stores it.
 			*/
 			char guessedChar;
+
 			printf("Your guess: ");
 			scanf(" %c", &guessedChar);
 			printf("\n");
@@ -154,6 +166,7 @@ int main() {
 			array of incorrectly guessed letters.
 			*/
 			bool correctGuess = false;
+
 			for (int i = 0; i < goalWordLength; i++) {
 				if (guessedChar == goalWord[i]) {
 					goalWordDisplay[i] = guessedChar;
@@ -170,14 +183,15 @@ int main() {
 				appropriate message is printed. If it is a new incorrect guess,
 				the character is added to the array of incorrect guesses.
 				*/
-				bool alreadyGuessed = false;
-				for (int i = 0; i < strlen(incorrectLetters) && alreadyGuessed == false; i++) {
+				bool alreadyIncorrectlyGuessed = false;
+
+				for (int i = 0; i < strlen(incorrectLetters) && alreadyIncorrectlyGuessed == false; i++) {
 					if (guessedChar == incorrectLetters[i]) {
-						alreadyGuessed = true;
+						alreadyIncorrectlyGuessed = true;
 					}
 				}
 
-				if (alreadyGuessed) {
+				if (alreadyIncorrectlyGuessed) {
 					printf("%c was already incorrectly guessed. Try again.\n", guessedChar);
 				}
 				else {
