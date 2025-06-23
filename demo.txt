@@ -1,0 +1,66 @@
+Input File Contents:
+
+ardvark
+sandwich
+metor
+hometown
+university
+kangaroo
+koala
+animal
+bridge
+casket
+
+********************************************************************************
+Output:
+
+Welcome to Hangman! Please provide the name of your input file:
+words.txt
+You have 6 incorrect guesses remaining.
+Word: --------
+Incorrect guesses:
+Partial Matches: 3
+Your guess: w 
+
+The word DOES NOT contain w.
+You have 5 incorrect guesses remaining.
+Word: --------
+Incorrect guesses: w 
+Partial Matches: 3
+Your guess: u
+
+The word DOES NOT contain i.
+You have 3 incorrect guesses remaining.
+Word: --------
+Incorrect guesses: w u i 
+Partial Matches: 3
+Your guess: e
+
+The word DOES NOT contain e.
+You have 2 incorrect guesses remaining.
+Word: --------
+Incorrect guesses: w u i e 
+Partial Matches: 3
+Your guess: a
+
+The word DOES contain a.
+You have 2 incorrect guesses remaining.
+Word: -a--a---
+Incorrect guesses: w u i e
+Partial Matches: 1
+Your guess: b
+
+The word DOES NOT contain b.
+You have 1 incorrect guesses remaining.
+Word: -a--a---
+Incorrect guesses: w u i e b 
+Partial Matches: 1
+Your guess: c
+
+The word DOES NOT contain c.
+You have no incorrect guesses remaining.
+Word: -a--a---
+Incorrect guesses: w u i e b c 
+Partial Matches: 1
+
+You lost! The word was kangaroo.

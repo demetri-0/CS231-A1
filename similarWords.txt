@@ -1,6 +1,0 @@
-base
-case
-tase
-sandwich
-pancake
-tuck
